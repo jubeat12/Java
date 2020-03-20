@@ -1,0 +1,238 @@
+//Taewoo Kang
+//kangx766
+//Sequence - a sequence of objects represented as an array
+
+//sequence of bases represented as an array of Objects
+
+class Sequence<Base>{
+	private Object [] objects; //The bases themselves
+	private int count; //count a number of Bases in the sequence
+	
+	private static final int defaultSize = 10; //default sequence size
+	private static final int multiplier = 2; //how much to expand Objects?
+	
+	//constructors. make an empty sequence of default size or of size
+	
+	public Sequence(){
+		objects = new Object[defaultSize];
+		count = 0;
+	}
+	
+	public Sequence(int size){
+		if(size >= 0){
+			objects = new Object[size];
+			count = 0;
+		}
+		
+		public Sequence(int size){
+			if(size >= 0){
+				objects = new Object[size];
+				count = 0;
+			}
+			else{
+				throw new IllegalArgumentException("Negative size.");
+			}
+		}
+		
+		//Add - add base to the right end of the sequence. If there's not room to add
+		//Base - then increase the sequence's size by a factor of multiplier first
+		
+		public void add(Base base){
+			if(count >= objects.length){
+				object [] newObjects = new Object[multiplier * objects.length];
+				for(int index = 0; index < objects.length; index += 1){
+					newObjects[index] = objects[index];
+				}
+				objects = newObjects;
+			}
+			objects[count] = base;
+			count += 1;
+		}
+		
+		//Find - return the index of base in the sequence or -1 if base isn't there.
+		//If BASE is NULL, then we must use == instead of EQUALS, because NULL has no methods. 
+		
+		public int find(Base base){
+			if(base == null){
+				for(int index = 0; index < count; index += 1){
+					if(objects[index] == null){
+						return index;
+					}
+				}
+			}
+			else{
+				for(int index = 0; index < count; index += 1){
+					if(base.equals(objects[index])){
+						return index;
+					}
+				}
+			}
+			return -1;
+		}
+		
+		//GET - return the BASE at INDEX
+		
+		public Base get(int index){
+			if(0<= index && index < count){
+				return (Base) objects[index];
+			}
+			else{
+				throw new IllegalArgumentException("Index out of range.");
+			}
+		}
+		
+		//Length. Return how many BASEs there are.
+		
+		public int length(){
+			return count;
+		}
+		
+		//REMOVE - the first REMOVE removes the element at INDEX. The second removes the first
+		//appearance of BASE, wherever it is. If it can't find BASE then it does nothing.
+		
+		public void remove(int index){
+			if(0 <= index && index < count){
+				while(index < count - 1){
+					objects[index] = objects[index + 1];
+					index += 1;
+				}
+				count -= 1;
+				objects[count] = null;
+			}
+			else{
+				throw new IllegalArgumentException("Index out of range.");
+			}
+		}
+		
+		public void remove(Base base){
+			int index = find(base);
+			if(index >= 0){
+				remove(index);
+			}
+		}
+		
+		//To string - return a string of BASEs in the sequence. 
+		
+		public String toString(){
+			StringBuilder builder = new StringBuilder();
+			builder.append('[');
+			if(count > 0){
+				builder.append(objects[0]);
+				for(int index =1; index < count; index += 1){
+					builder.append(",");
+					builder.append(objects[index]);
+				{
+			}
+			builder.append(',');
+			builder.append(objects[index]);
+			}
+		}
+		builder.append(']');
+		return builder.toString();
+		}
+	}
+	
+	//Sequence Demo
+	
+	class SequenceDemo{
+		//Main - Make an instance of SEQUENCE and test it. The comments show what will be printed.
+		
+		public static void main(String [] args){
+			Sequence<String> s = new Sequence<String>(4);
+			
+			System.out.println(s.length()); //0
+			System.out.println(s); //[]
+			
+			s.add("A"); //Add elements without expanding
+			s.add("B");
+			s.add("C");
+			s.add("D");
+			
+			System.out.println(s.length()); //4
+			System.out.println(s); //[A, B, C, D]
+			
+			s.add("E"); //Expand and add an element
+			
+			System.out.println(s.length()); //5
+			System.out.println(s); //[A,B,C,D,E]
+			
+			s.remove(1);
+			
+			System.out.println(s.length()); //4
+			System.out.println(s); //[A, C, D, E]
+			
+			s.remove(3);
+			
+			System.out.println(s.length()); //3
+			System.out.println(s);// [A, C, D]
+			
+			System.out.println(s.find("C")); //1
+			System.out.println(s.get(1)); //C
+			
+			s.remove("D"); 
+			
+			System.out.println(s.length()); //2
+			System.out.println(s); //[A, C]
+			
+			s.remove("A");
+			
+			System.out.println(s.length()); //1
+			System.out.println(s); //[c]
+		}
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+	
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
