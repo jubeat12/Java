@@ -1,0 +1,124 @@
+//Taewoo Kang
+//kangx766
+//HORROR - demonstrate java multiple inheritance using interfaces
+
+//Scary - a sacry character from a horror movie
+
+class Scary{
+	private String name;
+	
+	public Scary(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return name;
+	}
+}
+
+//Alive methods - The methods an alive scary character must have
+
+interfaces AliveMethods{
+	public String getName();
+	public int getAliveness();
+}
+
+//Alive - scary character from a horror movie
+
+class Alive extends Scary implements AliveMethods{
+	private int aliveness;
+	
+	public Alive(String name, int aliveness){
+		super(name);
+		this.aliveness = aliveness;
+	}
+	
+	public int getAliveness(){
+		return aliveness;
+	}
+}
+
+//Dead methods - the methods a dead scary character must have
+
+interfaces DeadMethods{
+	public String getName();
+	public int getDeadness();
+}
+
+//DEAD - a dead, scary character from a horror movie
+
+class Dead extends Scary implements DeadMethods{
+	private int deadness;
+	
+	public Dead(String name, int deadness){
+		super(name);
+		this.deadness = deadness;
+	}
+	
+	public int getDeadness(){
+		return deadness;
+	}
+}
+
+//Alive and Dead - alive and dead scary character from a horror movie
+
+class AliveAndDead extends Scary implements AliveMethods, DeadMethods{
+	public int aliveness;
+	public int deadness;
+	
+	public AliveAndDead(String name, int aliveness, int deadness){
+		super(name);
+		this.aliveness = aliveness;
+		this.deadness = deadness;
+	}
+	
+	public int getAliveness(){
+		return aliveness;
+	}
+	
+	public int getDeadness(){
+		return deadness;
+	}
+}
+
+//HORROR - demonstrate multiple inheritance with interfaces
+
+class Horror{
+	private static void writeAlive(AliveMethods x){
+		System.out.println(x.getName() + "is" + x.getAliveness() + "%alive.");
+	}
+	private static void writeDead(DeadMethods x){
+		System.out.println(x.getName() + "is" + x.getDeadness() + "% dead.");
+	}
+	
+	public static void main(String [] args){
+		Alive monster = new Alive("Frankerstein's monster", 85);
+		Alive wolfman = new Alive("The Wolf Man", 100);
+		
+		writeAlive(monster); //Frankerstein's monster is 85% alive
+		writeAlive(wolfman); //The wolf Man is 100% alive.
+		
+		Dead ghost = new Dead("Casper", 100);
+		Dead mummy = new Dead("Imhotep", 50);
+		
+		writeDead(ghost); //Casper is 100% dead
+		writeDead(mummy); //Imhotep is 50% dead
+		
+		AliveAndDead vampire = new AliveAndDead("Dracula", 50, 50);
+		
+		writeAlive(vampire); //Dracula is 50% alive
+		writeDead(vampire); // Dracula is 50% dead
+	}
+}
+		
+		
+
+
+
+
+
+
+
+
+
+
