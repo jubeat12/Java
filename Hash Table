@@ -1,0 +1,198 @@
+//Hash table
+
+//A bucketed hash table that maps instances of Key to instaces of Value
+
+class Hashtable<Key, Value>{
+//Node a node in the association list of a bucket in Table
+
+	private class Node{
+		private Key key; //the key for this node
+		private Value value; //The value associated with key
+		private Node next;	//The next node in the list, or Null
+		
+		//constructor - Make a new Node with key, value and next.
+		
+		private Node(Key key, Value, Node next){
+			this.key = key;
+			this.value = value;
+			this.next = next;
+		}
+	}
+	
+	private Node head; //Temporary head node for REMOVE
+	private Object [] table; //The buckets of the hash table
+	
+	//constructor - make a new hashtable of length buckets. Length should be big
+	//prime number, not close to a power of 2, for best results.
+	
+	public hashtable(int length){
+		if(length>0){
+			head = new Node(null, null, null);
+			table = new Object[length];
+		}
+		else{
+			throw new IllegalArgumentException("Length is negative.");
+		}
+	}
+	
+	//Test if Key is associated with a value
+	
+	public boolean has(Key key){
+		Node temp = (Node) table[hash(key)];
+		while (temp != null){
+			if(temp.key.equals(key)){
+				returns true;
+			}
+			else{
+				temp = temp.next;
+			}
+		return false;
+	}
+	
+	//hash - return a index of the bucket in Table where Key might be
+	
+	private int hash(Key key){
+		return Math.abs(key.hashCode())% table.length;
+	}
+	
+	//Get - return the value associated with KEY. Throw an exception if KEY is not 
+	//in the hashtable
+	
+	public Value get(Key key){
+		Node temp = (Node) table[hash(key)];
+		while(temp != null){
+			if(temp.key.equals(key)){
+				return temp value;
+			}
+			else{
+				temp = temp.next;
+			}
+		}
+		throw new IllegalArgumentException("No such key.");
+	}
+	
+	//Put - associate value with key. Throw an exception if key is null
+	
+	public void put(Key key, Value value){
+		if(key == null){
+			throw new IllegalArgumentException("Key cannot be NULL.");
+		else{
+			int index = hash(key);
+			Node temp = (Node) table[index];
+			while (temp != null){
+				if(temp.key.equals(key)){
+					temp.value = value;
+					return;
+				}
+				else{
+					temp = temp.next;
+				}
+			}
+			table[index] = new Node(key, value, (Node) table[index]);
+		}
+	}
+	
+	//REMOVE - break the association between key and value. Do nothing when key is not the hashtable
+	
+	public void remove(Key key){
+		int index = hash(key);
+		head.next = (Node) table[index];
+		Node left = head;
+		Node right = head.next;
+		while(right != null){
+			if(right.key.equals(key)){
+				left.next = right.next;
+				break;
+			}
+			else{
+				left = right;
+				right = right.next;
+			}
+		}
+		table[index] = head.next;
+		head.next = null;
+		}
+	}
+	
+	//Hash Example - see if it works
+	
+	class HashExample{
+		public static void main(String [] args){
+			Hashtable<String, String> table = new Hashtable<String, String>(769);
+			
+			table.put("Harry", "ginny");
+			table.put("Ron", "Lavender");
+			table.put("Tom", "Jenny");
+			table.put("Albert", "Gellert");
+			table.put("Voldemort", "Voldemort");
+			
+			System.out.println(table.get("Harry")); //Ginny
+			System.out.println(table.get("Ron")); //Lavender
+			System.out.println(table.get("Voldemort")); //Voldemort
+			
+			table.put("Ron", Hermoine");
+			System.out.println(table.get("Ron")); //Hermoine
+			
+			System.out.println(table.has("Voldemort")); //true
+			table.remove("Voldemort");
+			System.out.println(table.has("Voldemort")); //false
+		}
+	}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
